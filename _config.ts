@@ -16,6 +16,9 @@ site.use(tailwindcss({
 	},
 }));
 site.use(postcss());
-site.use(sitemap())
+site.use(sitemap());
+
+site.copy("billeder/baggrund.gif")
+site.copy("billeder/blomster.png")
 
 export default site;
