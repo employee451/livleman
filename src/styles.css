@@ -23,34 +23,3 @@
 ::-webkit-scrollbar-corner {
 	background: #f0f0f0;
 }
-
-/* Custom cursors */
-.sparkle-cursor {
-	cursor: none;
-}
-
-.link-hover {
-	cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>✨</text></svg>") 16 0, auto;
-}
-
-.folder-hover {
-	cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>📁</text></svg>") 16 0, auto;
-}
-
-/* Trail effect */
-#cursor-trail {
-	position: fixed;
-	pointer-events: none;
-	z-index: 9999;
-}
-
-.trail-dot {
-	position: absolute;
-	width: 8px;
-	height: 8px;
-	background: rgb(147, 51, 234);
-	border-radius: 50%;
-	mix-blend-mode: multiply;
-	pointer-events: none;
-	transition: transform 0.1s ease-out;
-}

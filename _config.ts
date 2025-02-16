@@ -1,8 +1,8 @@
 import lume from "lume/mod.ts";
 import tailwindcss from "lume/plugins/tailwindcss.ts";
 import postcss from "lume/plugins/postcss.ts";
-import relations from "lume/plugins/relations.ts";
 import sitemap from "lume/plugins/sitemap.ts";
+import typography from "npm:@tailwindcss/typography";
 
 const site = lume({
 	src: './src',
@@ -10,16 +10,12 @@ const site = lume({
 });
 
 site.use(tailwindcss({
-	extensions: ['.vto', '.html']
+	extensions: ['.vto', '.html'],
+	options: {
+		plugins: [typography],
+	},
 }));
 site.use(postcss());
 site.use(sitemap())
-
-site.use(relations({
-	foreignKeys: {
-		opslag: "opslag_id",
-		person: "person_id",
-	  }
-}));
 
 export default site;
