@@ -1,0 +1,18 @@
+---
+layout: layout.vto
+---
+{{ comp Sideindhold }}
+<article class="mx-auto max-w-2xl text-left">
+	<nav class="mb-8">
+      <a href="/" class="hover:bg-white/20 border-b border-black">Hjem</a>
+      <span class="mx-2">/</span>
+      <span>{{ titel }}</span>
+    </nav>
+
+    <h1 class="mb-8 text-4xl">{{ titel }}</h1>
+
+    <div class="space-y-6 leading-relaxed">
+        {{ content }}
+    </div>
+  </article>
+{{ /comp }}

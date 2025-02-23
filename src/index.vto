@@ -2,5 +2,22 @@
 layout: layout.vto
 ---
 {{ comp Sideindhold }}
-Vi er lige ved at finde ud af, hvad der er op og ned
+<div class="mx-auto max-w-2xl">
+  <h1 class="mb-4 text-2xl">Liv Leman – Portfolio</h1>
+  
+  <p class="mb-8">hvad synes du der skal stå her life?</p>
+
+  <section>
+    <h2 class="mb-6 text-xl">Projekter</h2>
+    <ul class="space-y-4">
+        {{ for projekt of search.pages("type=projekt") }}
+        <li>
+            <a href="{{ projekt.url }}" class="text-lg border-b border-black hover:bg-white/20">
+            {{ projekt.titel }}
+            </a>
+        </li>
+        {{ /for }}
+    </ul>
+  </section>
+</div>
 {{ /comp }}
