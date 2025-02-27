@@ -3,6 +3,7 @@ import tailwindcss from "lume/plugins/tailwindcss.ts";
 import postcss from "lume/plugins/postcss.ts";
 import sitemap from "lume/plugins/sitemap.ts";
 import typography from "npm:@tailwindcss/typography";
+import robots from "lume/plugins/robots.ts";
 
 const site = lume({
 	src: './src',
@@ -17,6 +18,9 @@ site.use(tailwindcss({
 }));
 site.use(postcss());
 site.use(sitemap());
+site.use(robots({
+	disallow: "*",
+}));
 
 site.copy("billeder/baggrund.gif")
 site.copy("billeder/blomster.png")
