@@ -15,7 +15,7 @@ Den fandt sted på AKVARIET - RMC.
 .lightbox {
 	display: none;
 	position: fixed;
-	top: -100px;
+	top: -50px;
 	left: 0;
 	width: 100vw;
 	height: 110vh;
@@ -70,14 +70,6 @@ Den fandt sted på AKVARIET - RMC.
 	background-color: rgba(255, 255, 255, 0.4);
 }
 
-.lightbox-prev {
-	left: 20px;
-}
-
-.lightbox-next {
-	right: 20px;
-}
-
 .lightbox-close {
 	position: absolute;
 	top: -40px;
@@ -126,16 +118,6 @@ Den fandt sted på AKVARIET - RMC.
 <div class="lightbox">
 	<div class="lightbox-content">
 		<div class="lightbox-close">&times;</div>
-		<div class="lightbox-prev">
-		<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-		</svg>
-		</div>
-		<div class="lightbox-next">
-		<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-		</svg>
-		</div>
 		
 		<!-- Lightbox images (will be populated by JavaScript) -->
 	</div>
@@ -146,8 +128,6 @@ Den fandt sted på AKVARIET - RMC.
 	const lightbox = document.querySelector('.lightbox');
 	const lightboxContent = document.querySelector('.lightbox-content');
 	const closeBtn = document.querySelector('.lightbox-close');
-	const prevBtn = document.querySelector('.lightbox-prev');
-	const nextBtn = document.querySelector('.lightbox-next');
 	const galleryImages = document.querySelectorAll('.gallery-img');
 	let currentIndex = 0;
 	
@@ -186,17 +166,6 @@ Den fandt sted på AKVARIET - RMC.
 	lightbox.classList.remove('active');
 	document.body.style.overflow = ''; // Restore scrolling
 	}
-	
-	// Navigate through images
-	prevBtn.addEventListener('click', () => {
-	currentIndex = (currentIndex - 1 + imageSources.length) % imageSources.length;
-	updateLightboxImage();
-	});
-	
-	nextBtn.addEventListener('click', () => {
-	currentIndex = (currentIndex + 1) % imageSources.length;
-	updateLightboxImage();
-	});
 	
 	// Keyboard navigation
 	document.addEventListener('keydown', (e) => {
