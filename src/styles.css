@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+	cursor:url(/billeder/mus.png) 28 28, auto;
+}
+
+a {
+	cursor: pointer;
+}
+
 ::-webkit-scrollbar {
 	width: 16px;
 	height: 16px;
