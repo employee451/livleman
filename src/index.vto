@@ -8,7 +8,7 @@ layout: layout.vto
   <section>
     <h2 class="mb-6 text-xl">Projekter</h2>
     <ul class="space-y-4">
-        {{ for projekt of search.pages("type=projekt") }}
+        {{ for projekt of search.pages("type=projekt", "order raekkefoelge=asc") }}
         <li>
             <a href="{{ projekt.url }}" class="text-lg border-b border-black hover:bg-white/20">
             {{ projekt.titel }}
