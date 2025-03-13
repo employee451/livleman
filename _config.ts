@@ -4,6 +4,7 @@ import postcss from "lume/plugins/postcss.ts";
 import sitemap from "lume/plugins/sitemap.ts";
 import typography from "npm:@tailwindcss/typography";
 import robots from "lume/plugins/robots.ts";
+import favicon from "lume/plugins/favicon.ts";
 
 const site = lume({
 	src: './src',
@@ -20,6 +21,9 @@ site.use(postcss());
 site.use(sitemap());
 site.use(robots({
 	disallow: "*",
+}));
+site.use(favicon({
+	input: "/billeder/mus.png",
 }));
 
 site.copy("billeder")
