@@ -22,7 +22,6 @@ site.use(robots({
 	disallow: "*",
 }));
 
-site.copy("billeder/baggrund.gif")
-site.copy("billeder/blomster.png")
+site.copy("billeder")
 
 export default site;
