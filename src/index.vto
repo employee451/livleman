@@ -11,7 +11,7 @@ layout: layout.vto
         {{ for projekt of search.pages("type=projekt", "order raekkefoelge=asc") }}
         <li>
             <a href="{{ projekt.url }}" class="text-lg border-b border-black hover:bg-white/20">
-            {{ projekt.titel }}
+            {{ projekt.forsidetitel ?? projekt.titel }}
             </a>
         </li>
         {{ /for }}
