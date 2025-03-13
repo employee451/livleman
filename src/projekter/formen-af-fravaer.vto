@@ -11,34 +11,215 @@ raekkefoelge: 3
 Den fandt sted på AKVARIET - RMC.
 </p>
 
-<div class="my-12 lg:-mx-20">
-	<div class="grid grid-cols-2 gap-4">
-		<div class="grid gap-4">
-			<div>
-				<img class="h-auto max-w-full rounded-lg" src="/billeder/formen-af-fravaer/5.jpeg" alt="">
-			</div>
-			<div>
-				<img class="h-auto max-w-full rounded-lg" src="/billeder/formen-af-fravaer/1.jpeg" alt="">
-			</div>
-			<div>
-				<img class="h-auto max-w-full rounded-lg" src="/billeder/formen-af-fravaer/2.jpeg" alt="">
-			</div>
+<style>
+.lightbox {
+	display: none;
+	position: fixed;
+	top: -100px;
+	left: 0;
+	width: 100vw;
+	height: 110vh;
+	background-color: rgba(0, 0, 0, 0.75);
+	z-index: 1000;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	margin: 0;
+	padding: 0;
+}
+
+.lightbox.active {
+	display: flex;
+	opacity: 1;
+}
+
+.lightbox-content {
+	position: relative;
+	margin: auto;
+	max-width: 90%;
+	max-height: 80vh;
+}
+
+.lightbox-img {
+	display: none;
+	max-height: 80vh;
+	max-width: 100%;
+	object-fit: contain;
+}
+
+.lightbox-img.active {
+	display: block;
+}
+
+.lightbox-nav {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 50px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(255, 255, 255, 0.2);
+	color: white;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.lightbox-nav:hover {
+	background-color: rgba(255, 255, 255, 0.4);
+}
+
+.lightbox-prev {
+	left: 20px;
+}
+
+.lightbox-next {
+	right: 20px;
+}
+
+.lightbox-close {
+	position: absolute;
+	top: -40px;
+	right: 0;
+	color: white;
+	font-size: 30px;
+	cursor: pointer;
+}
+
+.gallery-img {
+	cursor: pointer;
+}
+</style>
+
+<div class="my-12 lg:-mx-20 grid grid-cols-2 gap-4">
+	<div class="grid gap-4">
+		<div>
+			<img class="gallery-img h-auto max-w-full rounded-lg" src="/billeder/formen-af-fravaer/5.jpeg" alt="">
 		</div>
-		<div class="grid gap-4">
-			<div>
-				<img class="h-auto max-w-full rounded-lg" src="/billeder/formen-af-fravaer/3.jpeg" alt="">
-			</div>
-			<div>
-				<img class="h-auto max-w-full rounded-lg" src="/billeder/formen-af-fravaer/6.jpeg" alt="">
-			</div>
-			<div>
-				<img class="h-auto max-w-full rounded-lg" src="/billeder/formen-af-fravaer/7.jpeg" alt="">
-			</div>
+		<div>
+			<img class="gallery-img h-auto max-w-full rounded-lg" src="/billeder/formen-af-fravaer/1.jpeg" alt="">
 		</div>
-		<div class="grid gap-4">
-			<div>
-				<img class="h-auto max-w-full rounded-lg" src="/billeder/formen-af-fravaer/4.jpeg" alt="">
-			</div>
+		<div>
+			<img class="gallery-img h-auto max-w-full rounded-lg" src="/billeder/formen-af-fravaer/2.jpeg" alt="">
+		</div>
+	</div>
+	<div class="grid gap-4">
+		<div>
+			<img class="gallery-img h-auto max-w-full rounded-lg" src="/billeder/formen-af-fravaer/3.jpeg" alt="">
+		</div>
+		<div>
+			<img class="gallery-img h-auto max-w-full rounded-lg" src="/billeder/formen-af-fravaer/6.jpeg" alt="">
+		</div>
+		<div>
+			<img class="gallery-img h-auto max-w-full rounded-lg" src="/billeder/formen-af-fravaer/7.jpeg" alt="">
+		</div>
+	</div>
+	<div class="grid gap-4">
+		<div>
+			<img class="gallery-img h-auto max-w-full rounded-lg" src="/billeder/formen-af-fravaer/4.jpeg" alt="">
 		</div>
 	</div>
 </div>
+
+	<!-- Lightbox -->
+<div class="lightbox">
+	<div class="lightbox-content">
+		<div class="lightbox-close">&times;</div>
+		<div class="lightbox-prev">
+		<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+		</svg>
+		</div>
+		<div class="lightbox-next">
+		<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+		</svg>
+		</div>
+		
+		<!-- Lightbox images (will be populated by JavaScript) -->
+	</div>
+</div>
+
+
+<script>
+	const lightbox = document.querySelector('.lightbox');
+	const lightboxContent = document.querySelector('.lightbox-content');
+	const closeBtn = document.querySelector('.lightbox-close');
+	const prevBtn = document.querySelector('.lightbox-prev');
+	const nextBtn = document.querySelector('.lightbox-next');
+	const galleryImages = document.querySelectorAll('.gallery-img');
+	let currentIndex = 0;
+	
+	// Get all image sources
+	const imageSources = Array.from(galleryImages).map(img => img.src);
+	
+	// Create lightbox images
+	imageSources.forEach((src, index) => {
+	const lightboxImg = document.createElement('img');
+	lightboxImg.src = src;
+	lightboxImg.alt = `Gallery image ${index + 1}`;
+	lightboxImg.classList.add('lightbox-img', 'rounded-lg');
+	if (index === 0) lightboxImg.classList.add('active');
+	lightboxContent.appendChild(lightboxImg);
+	});
+	
+	const lightboxImages = document.querySelectorAll('.lightbox-img');
+	
+	// Open lightbox when gallery image is clicked
+	galleryImages.forEach((img, index) => {
+	img.addEventListener('click', () => {
+		currentIndex = index;
+		updateLightboxImage();
+		lightbox.classList.add('active');
+		document.body.style.overflow = 'hidden'; // Prevent scrolling
+	});
+	});
+	
+	// Close lightbox
+	closeBtn.addEventListener('click', closeLightbox);
+	lightbox.addEventListener('click', (e) => {
+	if (e.target === lightbox) closeLightbox();
+	});
+	
+	function closeLightbox() {
+	lightbox.classList.remove('active');
+	document.body.style.overflow = ''; // Restore scrolling
+	}
+	
+	// Navigate through images
+	prevBtn.addEventListener('click', () => {
+	currentIndex = (currentIndex - 1 + imageSources.length) % imageSources.length;
+	updateLightboxImage();
+	});
+	
+	nextBtn.addEventListener('click', () => {
+	currentIndex = (currentIndex + 1) % imageSources.length;
+	updateLightboxImage();
+	});
+	
+	// Keyboard navigation
+	document.addEventListener('keydown', (e) => {
+	if (!lightbox.classList.contains('active')) return;
+	
+	if (e.key === 'Escape') closeLightbox();
+	if (e.key === 'ArrowLeft') {
+		currentIndex = (currentIndex - 1 + imageSources.length) % imageSources.length;
+		updateLightboxImage();
+	}
+	if (e.key === 'ArrowRight') {
+		currentIndex = (currentIndex + 1) % imageSources.length;
+		updateLightboxImage();
+	}
+	});
+	
+	function updateLightboxImage() {
+		lightboxImages.forEach((img, index) => {
+			if (index === currentIndex) {
+			img.classList.add('active');
+			} else {
+			img.classList.remove('active');
+			}
+		});
+	}
+</script>
